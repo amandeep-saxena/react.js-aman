@@ -1,5 +1,6 @@
-import React , { useState , useEffect} from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function UpdateUser() {
@@ -11,28 +12,27 @@ function UpdateUser() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/getUser/"+id)
-      .then((result) => {onsole.log(result)
-        setName(result.data.name)
-        setEmail(result.data.email)
-        setAge(result.data.age)
-      
+      .get("http://localhost:3000/getUser/" + id)
+      .then((result) => {
+        onsole.log(result);
+        setName(result.data.name);
+        setEmail(result.data.email);
+        setAge(result.data.age);
       })
       .catch((error) => console.log(error));
   });
 
-
-
-
   const Update = (e) => {
     e.preventDefault();
-    axios.
-      put('http://localhost:3000/updateUser'+id, { name, email, age })
+    axios
+      .put("http://localhost:3000/updateUser" + id, { name, email, age })
       .then((result) => {
-        console.log(result); 
-        navigets('/');  
+        console.log(result);
+        navigets("/");
       })
-      .catch((error) => console.log(error));
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -46,7 +46,7 @@ function UpdateUser() {
               type="text"
               placeholder="Enter Name"
               className="form-control"
-              value={name} 
+              value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </div>
@@ -58,7 +58,6 @@ function UpdateUser() {
               className="form-control"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              
             />
           </div>
           <div className="mb-2">
